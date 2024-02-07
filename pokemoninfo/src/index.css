@@ -17,41 +17,36 @@ code {
     monospace;
 }
 
+.curve-text {
+  font-weight: bold
+}
+
 .pokeball {
   -webkit-animation: spin 4s linear infinite;
   -moz-animation: spin 4s linear infinite;
   animation: spin 4s linear infinite;
-}
-
-@-moz-keyframes spin {
-  100% {
-    -moz-transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-.pokeball {
+  -webkit-transition: margin 0.5s ease-out;
+  -moz-transition: margin 0.5s ease-out;
+  float: left;
   animation: spin 3s linear infinite;
   filter: drop-shadow(0 0 2rem crimson);
   border-radius: 100px;
 }
 
-.curve-text {
-  filter: drop-shadow(0 0 2rem crimson);
-  font-weight: bold
+.pokeball:hover {
+  cursor: pointer;
+  margin-top: -10px;
+  animation: bounce 1s infinite alternate;
 }
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(30px);
+  }
+} 
 
 @keyframes spin {
   0% {
@@ -60,7 +55,7 @@ code {
 
   25% {
     transform: rotate(720deg);
-    /* Spin for 25% of the animation duration (900 degrees) */
+    /* Spin for 25% of the animation duration (720 degrees) */
   }
 
   50% {
@@ -70,7 +65,7 @@ code {
 
   75% {
     transform: rotate(1440deg);
-    /* Spin again for the next 25% of the animation duration (1800 degrees) */
+    /* Spin again for the next 25% of the animation duration (1440 degrees) */
   }
 
   100% {
