@@ -10,12 +10,11 @@ export const fetchAllPokemon = async () => {
     return response.json();
 }
 
-// export const fetchPokemonImages = async () => {
-
+// export const fetchPokemonId = async (id) => {
 //     const options = {
 //         method: 'GET',
-//         headers: { 'Content-Type': 'application/json' }
+//         header: { 'Content-Type': 'application/json'}
 //     }
-//     const response = await fetch('https://pokeapi.co/api/v2/pokemon/', options)
+//     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, options)
 //     return response.json();
 // }
