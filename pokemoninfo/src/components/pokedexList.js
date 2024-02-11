@@ -7,7 +7,7 @@ const PokedexList = () => {
     const [allPokemon, setAllPokemon] = useState([]);
     const [singlePokemon, setSinglePokemon] = useState([]);
     const [userInput, setUserInput] = useState([]);
-    const [handleTrue, setHandleTrue] = useState("false"); //handleTrue = false
+    const [handleTrue, setHandleTrue] = useState(false); 
 
     useEffect(() => {
         async function getAllPokemon() {
@@ -18,7 +18,6 @@ const PokedexList = () => {
                 const response2 = await Promise.all(PokemonUrls.map(url => fetch(url)));
                 const data = await Promise.all(response2.map(response => response.json()));
                 setAllPokemon(data);
-                setHandleTrue(false);
             } catch (error) {
                 console.error('Error Fetching Pokemon Data')
             }
@@ -31,7 +30,6 @@ const PokedexList = () => {
         try {
             const pokemonName = userInput;
             const pokemonData = await fetchSinglePokemon(pokemonName);
-            console.log(pokemonData);
             setSinglePokemon(pokemonData);
             setHandleTrue(true);
         } catch (error) {
@@ -43,8 +41,11 @@ const PokedexList = () => {
         setUserInput(event.target.value);
     }
 
-    const handleClearUser = () => {
-        setSinglePokemon(allPokemon); // Reset singlePokemon state to the original list of all Pokémon
+    async function handleClearUser() {
+        if (userInput.length === 0) {
+            setHandleTrue(false);
+            setSinglePokemon(allPokemon); // Reset singlePokemon state to the original list of all Pokémon
+        }
     };
 
     return (
@@ -63,7 +64,14 @@ const PokedexList = () => {
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="pokeball"><img src="Pokeball.png" width="30" height="50" alt="Pokeball"></img></span>
                         </div>
-                        <input type="text" onKeyUp={handleClearUser} value={userInput} onChange={handleChange} className="form-control" id="pokemonresults" placeholder="Search Pokemon" aria-label="Username" aria-describedby="basic-addon1" />
+                        <input
+                            onChange={handleChange}
+                            value={userInput}
+                            id="pokemonresults"
+                            type="text"
+                            placeholder="Search Pokemon"
+                            className="form-control"
+                            onKeyUp={handleClearUser} />
                     </div>
                 </form>
             </nav>
